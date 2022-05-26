@@ -3,4 +3,4 @@ mongo:
   database: "getir-case-study"
 
 server:
-  port: "8081"
+  port: "8080"

@@ -35,8 +35,12 @@ func main() {
 	http.HandleFunc("/in-memory/", cf.GetMemoryController().Set)
 	http.HandleFunc("/records", cf.GetRecordController().GetRecords)
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = config.GetConfig().Server.Port
+	}
 	httpServer := &http.Server{
-		Addr: ":" + config.GetConfig().Server.Port,
+		Addr: ":" + port,
 	}
 
 	go func() {
