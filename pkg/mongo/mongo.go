@@ -13,7 +13,8 @@ const (
 )
 
 func Init() (*mongo.Client, error) {
-	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 	fmt.Println("mongo conn reading",config.GetConfig().Mongo.Url )
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(config.GetConfig().Mongo.Url))
 	if err != nil {
