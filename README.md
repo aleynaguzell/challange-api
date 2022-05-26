@@ -3,7 +3,7 @@
 ### Environment
 
 ##### Development
-```json
+```
 // Verify that you've installed Go
 $ go version
 
@@ -69,10 +69,10 @@ http://localhost:8080/in-memory?key=active-tabs
 EXAMPLE SUCCESS RESPONSE
 
 Code : 200
-```
-```json
+
 Payload:
-        
+ ```
+```json       
 {
     "key": "active-tabs",
     "value": "getir"
