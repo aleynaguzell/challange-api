@@ -30,7 +30,7 @@ $ go run main.go
 EXAMPLE URL
 
 Prod:
-https://challange-api.herokuapp.com/in-memory?key=active-tabs
+https://challange-api.herokuapp.com/
 
 Dev:
 http://localhost:8080/
@@ -86,7 +86,10 @@ Payload:
 ```
 URI
 /in-memory/
-
+```
+METHOD
+POST
+```
 
 EXAMPLE REQUEST
 
