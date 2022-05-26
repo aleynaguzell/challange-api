@@ -1,5 +1,5 @@
 mongo:
-  url: "mongodb://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net:27017/getir-case-study"
+  url: "mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getir-case-study?retryWrites=true"
   database: "getir-case-study"
 
 server:
