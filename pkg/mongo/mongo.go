@@ -14,6 +14,7 @@ const (
 
 func Init() (*mongo.Client, error) {
 	ctx := context.Background()
+	fmt.Println("mongo conn reading",config.GetConfig().Mongo.Url )
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(config.GetConfig().Mongo.Url))
 	if err != nil {
 		return nil, err

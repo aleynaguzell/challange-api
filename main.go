@@ -27,6 +27,7 @@ func main() {
 	mClient, err := mongo.Init()
 	if err != nil {
 		logger.Logger.Error("mongo connection error", err)
+		return
 	}
 	database := storage.New(mClient, mStorage)
 	cf := controllers.NewControllerFactory(database)
