@@ -26,16 +26,16 @@ $ go run main.go
 - HealthCheck Endpoint  
   API ping endpoint barely checks that the API is running and is accessible.
 
-```json
+```
 EXAMPLE URL
 
 Prod:
 https://challange-api.herokuapp.com/in-memory?key=active-tabs
 
 Dev:
-http://localhost:8081/
+http://localhost:8080/
 ```
-```json
+```
 EXAMPLE SUCCESS RESPONSE
 
 Code : 200
@@ -48,28 +48,29 @@ Body: Ok
 - Get Endpoint  
   Get data from an in-memory database.
 
-```json
+```
 URI
 /in-memory
 ```
-```json
+```
 METHOD
 GET
 ```
-```json
+```
 EXAMPLE URL
 Prod:
 https://challange-api.herokuapp.com/in-memory?key=active-tabs
 
 Dev:
-http://localhost:8081/in-memory?key=active-tabs
+http://localhost:8080/in-memory?key=active-tabs
 
 ```
-```json
+```
 EXAMPLE SUCCESS RESPONSE
 
 Code : 200
-
+```
+```json
 Payload:
         
 {
@@ -82,36 +83,39 @@ Payload:
 - Set Endpoint  
   Set data to an in-memory database.
 
-```json
+```
 URI
 /in-memory/
-```
-```json
+
+
 EXAMPLE REQUEST
 
-Payload:
 
+Payload:
+```
+```json
 {
   "key": "active-tabs",
   "value": "getir"
 }
 ```
-```json
+```
 EXAMPLE URL
 
 Prod:
 https://challange-api.herokuapp.com/in-memory/
 
 Dev:
-http://localhost:8081/in-memory/
+http://localhost:8080/in-memory/
 ```
-```json
+```
 EXAMPLE SUCCESS RESPONSE
 
 Code : 201
+```
 
 Body:
-        
+ ```json       
 {
   "key": "active-tabs",
   "value": "getir"
@@ -123,42 +127,43 @@ Body:
 
 - GetRecords Endpoint  
   Fetch data from records collection
-```json
+```
 URI
 /records
-```
-```json
+
 METHOD
 POST
-```
-```json
+
 EXAMPLE URL
 
 Prod:
 https://challange-api.herokuapp.com/records
 
 Dev:
-http://localhost:8081/records
-```
-```json
+http://localhost:8080/records
+
+
 EXAMPLE REQUEST 
 
 Payload:
-
+```
+```json
 {
   "startDate": "2016-01-26",
   "endDate": "2018-02-02",
   "minCount": 2700,
   "maxCount": 3000
 }
+
 ```
-```json
+```
 EXAMPLE SUCCESS RESPONSE
 
 Code : 200
 
 Body:
-
+```
+```json
 {
   "code":0,
   "msg":"Success",
