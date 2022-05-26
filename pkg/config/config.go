@@ -20,12 +20,12 @@ type ServerConfiguration struct {
 }
 
 // Setup initialize configuration
-func Setup() error {
+func Setup(path string) error {
 	var configuration *Configuration
 
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath(".")
+	viper.AddConfigPath(path)
 
 	if err := viper.ReadInConfig(); err != nil {
 		//logger.Errorf("Error reading config file, %s", err)

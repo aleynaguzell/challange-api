@@ -2,8 +2,8 @@ package record
 
 import (
 	"context"
-	"github.com/aleynaguzell/getir-challange-api/model"
-	"github.com/aleynaguzell/getir-challange-api/pkg/config"
+	"github.com/aleynaguzell/challange-api/model"
+	"github.com/aleynaguzell/challange-api/pkg/config"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"time"

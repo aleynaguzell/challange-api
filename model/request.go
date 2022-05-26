@@ -6,4 +6,3 @@ type Request struct {
 	MinCount  int    `json:"minCount"`
 	MaxCount  int    `json:"maxCount"`
 }
-

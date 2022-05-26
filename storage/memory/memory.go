@@ -6,17 +6,24 @@ import (
 )
 
 type Store struct {
-	mutex *sync.Mutex
+	m    *sync.Mutex
 	data map[string]string
 }
 
-func (s *Store) Store(key,value string) error {
+// New creates inmemory store
+func New() *Store {
+	return &Store{
+		data: make(map[string]string),
+		m:    &sync.Mutex{},
+	}
+}
+
+func (s *Store) Store(key, value string) error {
 	if len(key) == 0 || len(value) == 0 {
 		return errors.New("key or value can not be empty")
 	}
-	s.mutex.Lock()
-	defer s.mutex.Unlock()
-
+	s.m.Lock()
+	defer s.m.Unlock()
 
 	s.data[key] = value
 
@@ -24,22 +31,14 @@ func (s *Store) Store(key,value string) error {
 }
 
 func (s *Store) Get(key string) (string, error) {
-	if len(key) == 0  {
-		return "",errors.New("key can not be empty")
+	if len(key) == 0 {
+		return "", errors.New("key can not be empty")
 	}
-	s.mutex.Lock()
-	defer s.mutex.Unlock()
+	s.m.Lock()
+	defer s.m.Unlock()
 	if val, ok := s.data[key]; ok {
 		return val, nil
 	}
 
-	 return "",errors.New("key is not found")
-}
-
-// New creates in memory store
-func New() *Store {
-	return &Store{
-		data: make(map[string]string),
-		mutex:   &sync.Mutex{},
-	}
+	return "", errors.New("key is not found")
 }

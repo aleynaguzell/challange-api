@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"encoding/json"
-	"github.com/aleynaguzell/getir-challange-api/model"
-	"github.com/aleynaguzell/getir-challange-api/storage"
+	"github.com/aleynaguzell/challange-api/model"
+	"github.com/aleynaguzell/challange-api/storage"
 	"net/http"
 )
 
@@ -17,6 +17,8 @@ func NewRecordController(db *storage.MongoStorage) *RecordController {
 	}
 }
 
+//Fetch data from records collection
+//HTTP.POST
 func (m *RecordController) GetRecords(rw http.ResponseWriter, request *http.Request) {
 
 	if request.Method == http.MethodPost {

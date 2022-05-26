@@ -3,9 +3,9 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/aleynaguzell/getir-challange-api/model"
-	"github.com/aleynaguzell/getir-challange-api/pkg/logger"
-	"github.com/aleynaguzell/getir-challange-api/storage/memory"
+	"github.com/aleynaguzell/challange-api/model"
+	"github.com/aleynaguzell/challange-api/pkg/logger"
+	"github.com/aleynaguzell/challange-api/storage/memory"
 	"net/http"
 )
 
@@ -19,44 +19,56 @@ func NewMemoryController(db *memory.Store) *MemoryController {
 	}
 }
 
+//Set data to an in-memory database
+//HTTP.POST
 func (c *MemoryController) Set(w http.ResponseWriter, r *http.Request) {
-	var input model.MemoryReq
-
-	err := json.NewDecoder(r.Body).Decode(&input)
-	if err != nil {
-		_, err := fmt.Fprintf(w, "%+v", err.Error())
+	if r.Method == http.MethodPost {
+		var request model.MemoryReq
+		err := json.NewDecoder(r.Body).Decode(&request)
 		if err != nil {
-			logger.Logger.Error("Request can not decoded", err)
-			return
+			_, err := fmt.Fprintf(w, "%+v", err.Error())
+			if err != nil {
+				logger.Logger.Error("Request can not decoded", err)
+				return
+			}
 		}
-	}
 
-	_ = c.db.Store(input.Key, input.Value)
-	w.WriteHeader(http.StatusCreated)
+		_ = c.db.Store(request.Key, request.Value)
+		w.WriteHeader(http.StatusCreated)
 
-	err = json.NewEncoder(w).Encode(&input)
-	if err != nil {
-		logger.Logger.Error("Request can not encoded", err)
-		return
-	}
-}
-
-func (c *MemoryController) Get(w http.ResponseWriter, r *http.Request) {
-	key := r.URL.Query()
-	keyQuery := key.Get("key")
-	value, err := c.db.Get(keyQuery)
-	if err != nil {
-		_, err := fmt.Fprintf(w, "%+v", err.Error())
+		err = json.NewEncoder(w).Encode(&request)
 		if err != nil {
-			logger.Logger.Error(err)
+			logger.Logger.Error("Request can not encoded", err)
 			return
 		}
 	} else {
-		out := model.MemoryReq{Key: keyQuery, Value: value}
-		err = json.NewEncoder(w).Encode(out)
+		http.Error(w, "Method not found", http.StatusNotFound)
+	}
+}
+
+//Fetch data from an in-memory database
+//HTTP.GET
+func (c *MemoryController) Get(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		keyQuery := r.URL.Query()
+		key := keyQuery.Get("key")
+		value, err := c.db.Get(key)
 		if err != nil {
-			logger.Logger.Error(err)
-			return
+			_, err := fmt.Fprintf(w, "%+v", err.Error())
+			if err != nil {
+				logger.Logger.Error(err)
+				return
+			}
+		} else {
+			out := model.MemoryReq{Key: key, Value: value}
+			err = json.NewEncoder(w).Encode(out)
+			if err != nil {
+				logger.Logger.Error(err)
+				return
+			}
+			w.WriteHeader(http.StatusOK)
 		}
+	} else {
+		http.Error(w, "Method not found", http.StatusNotFound)
 	}
 }

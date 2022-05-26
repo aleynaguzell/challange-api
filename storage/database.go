@@ -1,43 +1,43 @@
 package storage
 
 import (
-	"github.com/aleynaguzell/getir-challange-api/storage/memory"
-	"github.com/aleynaguzell/getir-challange-api/storage/record"
+	"github.com/aleynaguzell/challange-api/storage/memory"
+	"github.com/aleynaguzell/challange-api/storage/record"
 	"go.mongodb.org/mongo-driver/mongo"
 )
+
 type Database struct {
-	mongo *MongoStorage
+	mongo  *MongoStorage
 	memory *memory.Store
 }
 
 type MongoStorage struct {
 	mongoClient *mongo.Client
-	records RecordRepository
+	records     RecordRepository
 }
 
-func NewMongo (client *mongo.Client )*MongoStorage{
-	return  &MongoStorage{
+func NewMongo(client *mongo.Client) *MongoStorage {
+	return &MongoStorage{
 		mongoClient: client,
-		records: record.NewRepository(client),
+		records:     record.NewRepository(client),
 	}
 }
 
-func (d *Database)GetMemoryDb ()*memory.Store{
-	return  d.memory
+func (d *Database) GetMemoryDb() *memory.Store {
+	return d.memory
 }
 
-func (d *Database) GetMongoStorage ()*MongoStorage{
-	return  d.mongo
+func (d *Database) GetMongoStorage() *MongoStorage {
+	return d.mongo
 }
 
-
-func New (client *mongo.Client,memory *memory.Store )*Database{
-	return  &Database{
-		mongo: NewMongo(client),
+func New(client *mongo.Client, memory *memory.Store) *Database {
+	return &Database{
+		mongo:  NewMongo(client),
 		memory: memory,
 	}
 }
 
-func (db *MongoStorage) GetRecordRepository() RecordRepository{
-	return  db.records
+func (db *MongoStorage) GetRecordRepository() RecordRepository {
+	return db.records
 }

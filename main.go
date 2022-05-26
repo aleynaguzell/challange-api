@@ -2,12 +2,12 @@ package main
 
 import (
 	"context"
-	"github.com/aleynaguzell/getir-challange-api/controllers"
-	"github.com/aleynaguzell/getir-challange-api/pkg/config"
-	"github.com/aleynaguzell/getir-challange-api/pkg/logger"
-	"github.com/aleynaguzell/getir-challange-api/pkg/mongo"
-	"github.com/aleynaguzell/getir-challange-api/storage"
-	"github.com/aleynaguzell/getir-challange-api/storage/memory"
+	"github.com/aleynaguzell/challange-api/controllers"
+	"github.com/aleynaguzell/challange-api/pkg/config"
+	"github.com/aleynaguzell/challange-api/pkg/logger"
+	"github.com/aleynaguzell/challange-api/pkg/mongo"
+	"github.com/aleynaguzell/challange-api/storage"
+	"github.com/aleynaguzell/challange-api/storage/memory"
 	"net/http"
 	"os"
 	"os/signal"
@@ -21,7 +21,7 @@ func HealthCheck(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	logger.Init()
-	config.Setup()
+	config.Setup(".")
 
 	mStorage := memory.New()
 	mClient, err := mongo.Init()
