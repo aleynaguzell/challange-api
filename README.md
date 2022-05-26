@@ -115,9 +115,9 @@ http://localhost:8080/in-memory/
 EXAMPLE SUCCESS RESPONSE
 
 Code : 201
-```
 
 Body:
+```
  ```json       
 {
   "key": "active-tabs",
