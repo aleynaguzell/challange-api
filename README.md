@@ -40,7 +40,7 @@ EXAMPLE SUCCESS RESPONSE
 
 Code : 200
 
-Body: Ok
+Body: Ok 
 ```
 
 **Memory**
